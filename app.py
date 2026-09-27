@@ -60,6 +60,47 @@ st.set_page_config(
     layout="wide",
 )
 
+import os
+
+# ============================================================
+# OpenAI API Key Management
+# ============================================================
+
+# 1. Check if OpenAI API Key is already in environment or Streamlit secrets
+openai_key = os.getenv("OPENAI_API_KEY")
+
+if not openai_key and hasattr(st, "secrets") and "OPENAI_API_KEY" in st.secrets:
+    openai_key = st.secrets["OPENAI_API_KEY"]
+
+# 2. If not found, prompt user in the sidebar
+if not openai_key:
+    with st.sidebar:
+        st.header("🔑 Configuration")
+        user_api_key = st.text_input(
+            "Enter your OpenAI API Key",
+            type="password",
+            help="Your key is kept safe in your session and used for processing."
+        )
+        
+        if user_api_key:
+            os.environ["OPENAI_API_KEY"] = user_api_key
+            openai_key = user_api_key
+            
+            # Optional: Save to local .env file if running locally
+            if not st.runtime.exists(): # or standard local check
+                env_path = Path(".env")
+                with open(env_path, "w") as f:
+                    f.write(f"OPENAI_API_KEY={user_api_key}\n")
+            
+            st.success("API Key applied successfully! Please refresh if needed.")
+            st.reruns = getattr(st, "rerun", None) # compatibility fallback
+        else:
+            st.warning("Please enter your OpenAI API Key to use the RAG application.")
+            st.stop()
+else:
+    # Ensure it's set in the environment for LangChain/OpenAI calls
+    os.environ["OPENAI_API_KEY"] = openai_key
+    
 
 st.title(
     "📄 Multi-Modal RAG by Virtual Techbox"
