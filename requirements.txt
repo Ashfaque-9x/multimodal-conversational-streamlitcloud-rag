@@ -13,3 +13,5 @@ tesseract
 reportlab
 streamlit
 faiss-cpu
+opencv-python-headless
+unstructured[pdf]
