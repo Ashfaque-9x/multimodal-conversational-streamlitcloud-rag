@@ -102,3 +102,7 @@ LLM Generation → Final Answer + Images + Source Metadata
 - `multimodel_rag.py`: The core RAG logic, including extraction, summarization, and retrieval chains.
 - `requirements.txt`: Project dependencies.
 - `rag_storage/`: Directory for persisted data (PDFs, FAISS indices, and docstores).
+
+## Video Tutorial for this Project
+
+[![Watch the video](https://img.youtube.com/vi/RWTNKLfrcwM/maxresdefault.jpg)](https://www.youtube.com/watch?v=RWTNKLfrcwM)
