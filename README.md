@@ -103,7 +103,7 @@ LLM Generation → Final Answer + Images + Source Metadata
 - `requirements.txt`: Project dependencies.
 - `rag_storage/`: Directory for persisted data (PDFs, FAISS indices, and docstores).
 
-## Live App Demo
+## 🔗 Live App Demo
 
 https://multimodal-conversational-rag.streamlit.app/
 
